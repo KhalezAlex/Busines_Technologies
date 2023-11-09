@@ -1,7 +1,7 @@
 import java.util.Arrays;
 import java.util.LinkedList;
 
-public class Main3 {
+public class Unrefactored {
     public static void sort(int[] arr, int start, int end) {
         if (start < end) {
             int mid = (start + end) / 2;
@@ -11,35 +11,35 @@ public class Main3 {
         }
     }
 
-    public static void merge(int[] arr, int start, int mid, int end) {
+    public static void merge(int[] A, int p, int q, int r) {
         LinkedList<Integer> firstPart = new LinkedList<>();
-        for (int i = start; i <= mid; i++) {
-            firstPart.add(arr[i]);
+        for (int i = p; i <= q; i++) {
+            firstPart.add(A[i]);
         }
         LinkedList<Integer> secondPart = new LinkedList<>();
-        for (int i = mid + 1; i <= end; i++) {
-            secondPart.add(arr[i]);
+        for (int i = q + 1; i <= r; i++) {
+            secondPart.add(A[i]);
         }
 
-        LinkedList<Integer> result = new LinkedList<>();
+        LinkedList<Integer> mergedPartsResult = new LinkedList<>();
         while (firstPart.size() != 0 && secondPart.size() != 0) {
             if (firstPart.peekFirst() > secondPart.peekFirst()) {
-                result.add(secondPart.pollFirst());
+                mergedPartsResult.add(secondPart.pollFirst());
             }
             else {
-                result.add(firstPart.pollFirst());
+                mergedPartsResult.add(firstPart.pollFirst());
             }
         }
-        result.addAll(firstPart.size() == 0 ? secondPart : firstPart);
+        mergedPartsResult.addAll(firstPart.size() == 0 ? secondPart : firstPart);
 
-        for (int i = start; i <= end; i++) {
-            arr[i] = result.pollFirst();
+        for (int i = p; i <= r; i++) {
+            A[i] = mergedPartsResult.pollFirst();
         }
     }
 
     public static void main(String[] args) {
         int[] A = new int[]{100, 5, 2, 4, 13, 6, 1, 3, 2, -1, 6, 3, 10, 2, 0, 20, 1, 56, 100, 4};
         sort(A, 0, A.length - 1);
-        System.out.println("51: " + Arrays.toString(A));
+        System.out.println(Arrays.toString(A));
     }
 }

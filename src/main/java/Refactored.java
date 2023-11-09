@@ -1,7 +1,7 @@
 import java.util.Arrays;
 import java.util.LinkedList;
 
-public class Main2 {
+public class Refactored {
     public static void sort(int[] arr, int start, int end) {
         if (start < end) {
             int mid = (start + end) / 2;
